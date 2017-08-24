@@ -42,6 +42,19 @@ public class LinkedList<E> {
 		}
 		size++;
 	}
+	
+	public void addLast(E data) {
+		Node<E> temp = new Node<E>(data,null);
+		Node<E> q = head;
+		if(q == null) {
+			head = temp;
+		}else {
+			while(q.next != null) {
+				q = q.next;
+			}
+			q.next = temp;
+		}
+	}
 
 	void addLastCircular(E data) {
 		Node<E> temp = new Node<E>(data, null);
@@ -112,14 +125,17 @@ public class LinkedList<E> {
 		System.out.println("Size of the Circular Linked List is: " + sizeC);
 	}
 
-	void deleteFirst() {
+	public E deleteFirst() {
+		E deleteElement = null;
 		if (head == null) {
 			System.out.println("Empty List");
 		} else {
+			deleteElement = head.item;
 			head = head.next;
 			size--;
 			System.gc();// free(temp);
 		}
+		return deleteElement;
 	}
 
 	void deleteLast() {
@@ -433,41 +449,9 @@ public class LinkedList<E> {
 		linkedlist.addFirst(9);
 		linkedlist.addFirst(8);
 		linkedlist.addFirst(6);
-		linkedlist.addFirst(5);
+		linkedlist.addFirst(8);
 		linkedlist.display();
 		System.out.println(linkedlist.head.item);
-		//boolean check = linkedlist.checkLengthEvenOrOdd();
-		//System.out.println("Is Linked List even or odd? " + check);
-		// linkedlist.addLastCircular(6);
-		// linkedlist.addLastCircular(5);
-		// linkedlist.addLastCircular(4);
-		// linkedlist.addLastCircular(3);
-		//linkedlist.addLastCircular(2);
-		//linkedlist.addLastCircular(1);
-		//linkedlist.displayCircular();
-		//linkedlist.divideCircularLinkedList();
-		//linkedlist.displayCircular();
-		//linkedlist.addNodeInSortedList(7);
-		//linkedlist.display();
-		// int x = linkedlist.lengthOfLoop();
-		// System.out.println("Length of the Loop is: " + x);
-
-		// linkedlist.findStartNodeOfLoop();
-		// linkedlist.checkNullTerminatedListOrEndsWithCycleUsingHashTable();
-		// linkedlist.checkNullTerminatedListOrEndsWithCycle();
-		// linkedlist.nthNodeFromEndTwoPointers(3);
-		// linkedlist.deleteFirst();
-		// linkedlist.display();
-		// linkedlist.deleteLast();
-		// linkedlist.display();
-		// linkedlist.deleteIntermediate(3);
-		// linkedlist.display();
-		// linkedlist.reverseList();
-		// linkedlist.display();
-		// linkedlist.nthNodeFromEndHashTable(3);
-		// linkedlist.nthNodeFromEnd(3);
-		// linkedlist.display();
-		// linkedlist.createList();
-	}
+			}
 
 }

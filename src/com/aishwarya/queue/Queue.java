@@ -1,63 +1,96 @@
 package com.aishwarya.queue;
+
+import com.aishwarya.linkedlist.LinkedList;
 import com.aishwarya.stacks.Stacks;
 
-public class Queue<E> {
-	
+public class Queue<E> extends LinkedList<E> {
+
 	Stacks<E> st = new Stacks<E>();
-	
 	Stacks<E> st1 = new Stacks<E>();
-	
-	void enQueue(E data) {
-		if(st.isEmpty()) {
+
+	public static class Node<E> {
+		E item;
+		Node<E> next;
+
+		Node(E data, Node<E> next) {
+			this.item = data;
+			this.next = next;
+		}
+	}
+
+	Node<E> front = null;
+	Node<E> rear = null;
+
+/*	void enQueue(E data) {
+		addLast(data);
+	}
+
+	E deQueue() {
+		E dequeueElement = deleteFirst();
+		if (dequeueElement == null) {
+			System.out.println("Stack is Empty");
+		}
+		return dequeueElement;
+	}
+*/
+	boolean isEmpty() {
+		if (front == null && rear == null) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	void enQueueUsingStack(E data) {
+		if (st.isEmpty()) {
 			st.push(data);
 		} else {
-			while(!st.isEmpty()) {
+			while (!st.isEmpty()) {
 				st1.push(st.pop());
 			}
 			st.push(data);
-			while(!st1.isEmpty()) {
+			while (!st1.isEmpty()) {
 				st.push(st1.pop());
 			}
 		}
-		
+
 	}
-	
-	E deQueue() {
-			return st.pop();
+
+	E deQueueUsingStack() {
+		return st.pop();
 	}
-	
-	void printQueue() {
+
+	void printQueueUsingStack() {
 		System.out.println("Queue is:- ");
-		
-		while(!st.isEmpty()) {
+
+		while (!st.isEmpty()) {
 			System.out.print(st.top() + " ");
 			st.pop();
 		}
 	}
-	
+
 	public static void main(String args[]) {
 		Queue<Integer> q = new Queue<Integer>();
-		
-		q.enQueue(9);
-		q.enQueue(2);
-		q.enQueue(3);
-		q.enQueue(4);
-		
-		q.deQueue();
-		q.deQueue();
-		
-		q.enQueue(5);
-		
-		q.deQueue();
-		
-		q.enQueue(6);
-		q.enQueue(8);
-		
-		
-		q.printQueue();
+
+		q.enQueueUsingStack(9);
+		q.enQueueUsingStack(2);
+		q.enQueueUsingStack(3);
+		q.enQueueUsingStack(4);
+
+		q.deQueueUsingStack();
+		q.deQueueUsingStack();
+
+		q.enQueueUsingStack(5);
+
+		q.deQueueUsingStack();
+
+		q.enQueueUsingStack(6);
+		q.enQueueUsingStack(8);
+
+		q.printQueueUsingStack();
 		System.out.print("\n");
 		System.out.println("Queue is First In First Out.");
 		System.out.println("And this is implementation of queue using two stacks.");
 	}
-	
+
 }

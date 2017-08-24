@@ -33,10 +33,30 @@ public class NextGreaterElement {
 		Stacks<Integer> st = new Stacks<Integer>();
 		int n = a.length;
 		st.push(a[0]);
+		int ele = 0, next = 0;
 		for(int i = 1; i < n; i++) {
-			while(!st.isEmpty() && st.top() < a[i]) {
+			next = a[i];
+			if(!st.isEmpty()) {
+				ele = st.pop();
 				
+				while(ele < next) {
+					System.out.println("Next Greater element for the element: " + ele + " is " + next);
+					if(st.isEmpty()) {
+						break;
+					}
+					ele = st.pop();
+				}
+				if(ele > next) {
+					st.push(ele);
+				}
 			}
+			st.push(next);
+		}
+		
+		while(!st.isEmpty()) {
+			ele = st.pop();
+			next = -1;
+			System.out.println("Next Greater Element for the element: " + ele + " is " + next);
 		}
 		
 	}
@@ -49,7 +69,7 @@ public class NextGreaterElement {
 			System.out.print(a[i] + " ");
 		}
 		System.out.println();
-		nge.nextGreaterElement(a);
+		nge.nextGreater(a);
 	}
 
 }
